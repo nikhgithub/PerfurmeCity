@@ -67,6 +67,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="IMAGES\1.jpg" />
+    <Content Include="IMAGES\2.jfif" />
+    <Content Include="IMAGES\3.jfif" />
+    <Content Include="IMAGES\4.jfif" />
+    <Content Include="IMAGES\5.jfif" />
+    <Content Include="IMAGES\6.jfif" />
+    <Content Include="IMAGES\7.jpg" />
+    <Content Include="IMAGES\8.jfif" />
+    <Content Include="IMAGES\9.jfif" />
+    <Content Include="IMAGES\S3.jfif" />
+    <Content Include="IMAGES\S5.jpg" />
+    <Content Include="IMAGES\SLIDE1.png" />
+    <Content Include="IMAGES\SLIDE2.jfif" />
+    <Content Include="IMAGES\SLIDE3.jfif" />
+    <Content Include="IMAGES\SLIDE4.jfif" />
+    <Content Include="IMAGES\test1.jpg" />
+    <Content Include="IMAGES\test2.jfif" />
+    <Content Include="IMAGES\test3.jpg" />
+    <Content Include="UI\Home.aspx" />
+    <Content Include="UI\SigIn.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +98,20 @@
       <DependentUpon>MasterLayout.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SigIn.aspx.cs">
+      <DependentUpon>SigIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\SigIn.aspx.designer.cs">
+      <DependentUpon>SigIn.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="MASTERPAGES\MasterLayout.Master" />
@@ -91,8 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DATA\" />
-    <Folder Include="IMAGES\" />
-    <Folder Include="UI\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
