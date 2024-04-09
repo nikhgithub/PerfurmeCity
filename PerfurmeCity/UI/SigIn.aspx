@@ -36,7 +36,7 @@
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control mb-3" placeholder="Email" Style="background-color: #333; color: white; border-color: #333;"></asp:TextBox>
                         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control mb-3" placeholder="Password" Style="background-color: #333; color: white; border-color: #333;"></asp:TextBox>
                         <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" CssClass="form-control mb-3" placeholder="Confirm Password" Style="background-color: #333; color: white; border-color: #333;"></asp:TextBox>
-                        <asp:Button ID="btnRegister" runat="server" Text="Register" CssClass="btn btn-primary btn-block" Style="background-color: #007bff; border-color: #007bff;" />
+                        <asp:Button ID="btnRegister" runat="server" Text="Register"  OnClick="btnRegister_Click" CssClass="btn btn-primary btn-block" Style="background-color: #007bff; border-color: #007bff;" />
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 <!-- Login Form -->
                 <div id="loginForm" class="card bg-dark text-white">
                     <div class="card-body">
-                        <h2 class="text-center mb-4">Login</h2>
+                        <h2 class="text-center mb-4">Login Here</h2>
                         <asp:Label ID="lblLoginError" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
                         <asp:TextBox ID="txtLoginEmailOrMobile" runat="server" CssClass="form-control mb-3" placeholder="Email or Mobile Number" AutoPostBack="true" Style="background-color: #333; color: white; border-color: #333;"></asp:TextBox>
                         <asp:TextBox ID="txtLoginPassword" runat="server" TextMode="Password" CssClass="form-control mb-3" placeholder="Password" Style="background-color: #333; color: white; border-color: #333;"></asp:TextBox>
