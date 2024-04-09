@@ -34,6 +34,20 @@
             max-height: 400px; /* Match the max-height of the images to maintain aspect ratio */
         }
 
+        .notification {
+            padding: 10px;
+            display: none;
+        }
+
+        .success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .error {
+            background-color: #f44336;
+            color: white;
+        }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>

@@ -87,12 +87,14 @@
     <Content Include="IMAGES\test3.jpg" />
     <Content Include="SQL LIBRARY\Create Db.sql" />
     <Content Include="SQL LIBRARY\Users_table.sql" />
+    <Content Include="UI\AdminPane.aspx" />
     <Content Include="UI\Home.aspx" />
     <Content Include="UI\SigIn.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DATA\DataAccess.cs" />
+    <Compile Include="DATA\ProductDAL.cs" />
     <Compile Include="MASTERPAGES\MasterLayout.Master.cs">
       <DependentUpon>MasterLayout.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -103,6 +105,13 @@
     <Compile Include="MODELS\Products.cs" />
     <Compile Include="MODELS\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\AdminPane.aspx.cs">
+      <DependentUpon>AdminPane.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\AdminPane.aspx.designer.cs">
+      <DependentUpon>AdminPane.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

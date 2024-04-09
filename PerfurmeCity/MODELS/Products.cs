@@ -8,18 +8,25 @@ namespace PerfurmeCity.MODELS
 {
     public class Products
     {
+        public int productID { get; set; }
         public string productName { get; set; }
         public string prodcutDescription { get; set; }
 
-        public SqlMoney ProductPrice { get; set; }
+        public decimal ProductPrice { get; set; }
 
         public string Producttags { get; set; }
 
-        public float ProductDiscount { get; set; }
+        public decimal ProductDiscount { get; set; }
 
-        public string ProductSpecifcs { get; set; }
+        public string ProductGender { get; set; }
 
-        public string productServerImage { get; set; }
+        public string productImageURL { get; set; }
+
+        public string productCreatedDate {  get; set; }
+
+        public bool productIsActive { get; set; }
+
+
 
     }
 

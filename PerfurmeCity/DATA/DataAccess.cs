@@ -15,7 +15,7 @@ namespace PerfurmeCity.DATA
     public class DataAccess
     {
         // Get connection string from web.config
-        private string connectionString = ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["PerfurmDBConnectionString"].ConnectionString;
 
         // Method to save registration details to database using stored procedure
         public int SaveRegistrationDetails(Users newuser)
@@ -61,5 +61,6 @@ namespace PerfurmeCity.DATA
                 }
             }
         }
+      
     }
 }
