@@ -11,7 +11,21 @@ namespace PerfurmeCity.MASTERPAGES
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+              
+            }
 
+        }
+
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            if (txtsearchengine.Text != "")
+            {
+                string searchParam = txtsearchengine.Text; // Replace this with your actual search parameter
+                Response.Redirect("~/UI/SearchResults.aspx?searchParam=" + searchParam);
+            }
+          
         }
     }
 }

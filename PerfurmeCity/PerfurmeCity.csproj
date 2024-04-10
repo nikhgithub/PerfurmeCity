@@ -89,6 +89,7 @@
     <Content Include="SQL LIBRARY\Users_table.sql" />
     <Content Include="UI\AdminPane.aspx" />
     <Content Include="UI\Home.aspx" />
+    <Content Include="UI\SearchResults.aspx" />
     <Content Include="UI\SigIn.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -118,6 +119,13 @@
     </Compile>
     <Compile Include="UI\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SearchResults.aspx.cs">
+      <DependentUpon>SearchResults.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\SearchResults.aspx.designer.cs">
+      <DependentUpon>SearchResults.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\SigIn.aspx.cs">
       <DependentUpon>SigIn.aspx</DependentUpon>

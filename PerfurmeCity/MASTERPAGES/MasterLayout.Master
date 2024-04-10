@@ -98,22 +98,28 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Products.aspx">Products</a>
                         </li>
-                        <!-- New Enquiry Link -->
+
+                        <%-- <!-- New Enquiry Link -->
                         <li class="nav-item">
                             <a class="nav-link" href="Enquiry.aspx">Enquiry</a>
                         </li>
                         <!-- New About Us Link -->
                         <li class="nav-item">
                             <a class="nav-link" href="AboutUs.aspx">About Us</a>
-                        </li>
-
+                        </li>--%>
                     </ul>
+                    <!-- Search Bar -->
+                    <form class="form-inline my-2 my-lg-0">
+                        <asp:TextBox  ID="txtsearchengine" runat="server" class="form-control mr-sm-2" type="search" Style="width: 600px" placeholder="Search for perfume" aria-label="Search"></asp:TextBox>
+                        <asp:button class="btn btn-outline-light my-2 my-sm-0" runat="server" ID="searchparm"  Text="search" OnClick="Unnamed_Click" type="submit" />
+                    </form>
+                    <!-- End of Search Bar -->
                     <ul class="navbar-nav">
-                        <li class="nav-item">
+                        <%--  <li class="nav-item">
                             <a class="nav-link" href="#">Sign In</a>
-                        </li>
+                        </li>--%>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Registration</a>
+                            <a class="nav-link" href="#">SignIn-SigUp</a>
                         </li>
                     </ul>
 

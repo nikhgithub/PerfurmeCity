@@ -16,6 +16,38 @@ namespace PerfurmeCity.DATA
         // Get connection string from web.config
         private string connectionString = ConfigurationManager.ConnectionStrings["PerfurmDBConnectionString"].ConnectionString;
 
+
+        public DataTable searchResults(string searchparam)
+        {
+            DataTable dataTable = new DataTable();
+
+            // Create a SqlConnection using the connection string
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // Create a SqlCommand object to execute the stored procedure
+                using (SqlCommand command = new SqlCommand("SearchProducts", connection))
+                {
+                    // Set the command type to stored procedure
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    // Add parameter for the search parameter
+                    command.Parameters.AddWithValue("@SearchParam", searchparam);
+
+                    // Open the database connection
+                    connection.Open();
+
+                    // Create a SqlDataAdapter to fill the DataTable with the results
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+
+                    // Fill the DataTable with the results of the stored procedure
+                    adapter.Fill(dataTable);
+                }
+            }
+
+            return dataTable;
+
+        }
+
         public bool SaveProductInfo(Products newproduct)
         {
             bool isInserted = false;
