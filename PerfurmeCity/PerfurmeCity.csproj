@@ -86,6 +86,11 @@
     <Content Include="IMAGES\test2.jfif" />
     <Content Include="IMAGES\test3.jpg" />
     <Content Include="SQL LIBRARY\Create Db.sql" />
+    <Content Include="SQL LIBRARY\fun.sql" />
+    <Content Include="SQL LIBRARY\search.sql" />
+    <Content Include="SQL LIBRARY\SP_newregistrationofuser.sql" />
+    <Content Include="SQL LIBRARY\SP_SaveProductInformation.sql" />
+    <Content Include="SQL LIBRARY\table_createproduct.sql" />
     <Content Include="SQL LIBRARY\Users_table.sql" />
     <Content Include="UI\AdminPane.aspx" />
     <Content Include="UI\Home.aspx" />

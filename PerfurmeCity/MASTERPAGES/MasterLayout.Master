@@ -48,7 +48,40 @@
             background-color: #f44336;
             color: white;
         }
+
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap; /* Allows wrapping of cards if the container's width is exceeded */
+            gap: 20px; /* Optional: Adds space between the cards */
+        }
+
+        .card {
+            flex: 0 1 18rem; /* Each card can grow to fill space but starts at 18rem */
+        }
     </style>
+    <script>
+        function AddToCart(productId) {
+            $.ajax({
+                type: "POST",
+                url: "YourPage.aspx/AddToCart",
+                data: JSON.stringify({ productId: productId }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    updateCartDisplay(response.d);
+                },
+                error: function (error) {
+                    console.error('Error adding product to cart:', error);
+                }
+            });
+        }
+
+        function updateCartDisplay(cartCount) {
+            $('#cartCount').text(cartCount);
+        }
+    </script>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -109,9 +142,12 @@
                         </li>--%>
                     </ul>
                     <!-- Search Bar -->
+                   <span id="cartCount" runat="server"></span>
+
+
                     <form class="form-inline my-2 my-lg-0">
-                        <asp:TextBox  ID="txtsearchengine" runat="server" class="form-control mr-sm-2" type="search" Style="width: 600px" placeholder="Search for perfume" aria-label="Search"></asp:TextBox>
-                        <asp:button class="btn btn-outline-light my-2 my-sm-0" runat="server" ID="searchparm"  Text="search" OnClick="Unnamed_Click" type="submit" />
+                        <asp:TextBox ID="txtsearchengine" runat="server" class="form-control mr-sm-2" type="search" Style="width: 600px" placeholder="Search perfume by your ingredients" aria-label="Search"></asp:TextBox>
+                        <asp:Button class="btn btn-outline-light my-2 my-sm-0" runat="server" ID="searchparm" Text="search" OnClick="Unnamed_Click" type="submit" />
                     </form>
                     <!-- End of Search Bar -->
                     <ul class="navbar-nav">

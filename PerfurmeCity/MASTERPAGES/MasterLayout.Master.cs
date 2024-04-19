@@ -13,7 +13,9 @@ namespace PerfurmeCity.MASTERPAGES
         {
             if (!IsPostBack)
             {
-              
+                // Retrieve the search text from session and set it to the text box
+                if (Session["SearchText"] != null)
+                    txtsearchengine.Text = Session["SearchText"].ToString();
             }
 
         }
@@ -22,10 +24,11 @@ namespace PerfurmeCity.MASTERPAGES
         {
             if (txtsearchengine.Text != "")
             {
-                string searchParam = txtsearchengine.Text; // Replace this with your actual search parameter
-                Response.Redirect("~/UI/SearchResults.aspx?searchParam=" + searchParam);
+                // Store the search text in session
+                Session["SearchText"] = txtsearchengine.Text;
+                Response.Redirect("~/UI/SearchResults.aspx?searchParam=");
             }
-          
+
         }
     }
 }
