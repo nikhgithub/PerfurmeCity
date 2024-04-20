@@ -18,6 +18,7 @@ namespace PerfurmeCity.DATA
         private string connectionString = ConfigurationManager.ConnectionStrings["PerfurmDBConnectionString"].ConnectionString;
 
         // Method to save registration details to database using stored procedure
+
         public int SaveRegistrationDetails(Users newuser)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -61,6 +62,47 @@ namespace PerfurmeCity.DATA
                 }
             }
         }
-      
+
+        public int Login(string identifier, string password)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Login", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // Add parameters to the stored procedure
+                cmd.Parameters.AddWithValue("@Identifier", identifier);
+                cmd.Parameters.AddWithValue("@Password", password);
+
+                // Add output parameter to capture the return value from the stored procedure
+                SqlParameter returnValue = cmd.Parameters.Add("@ReturnValue", SqlDbType.Int);
+                returnValue.Direction = ParameterDirection.ReturnValue;
+
+                try
+                {
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    // Get the return value from the stored procedure
+                    int returnValueFromSP = Convert.ToInt32(returnValue.Value);
+                    return returnValueFromSP;
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions here
+                    Console.WriteLine(ex.Message);
+                    return -2; // Return custom error code
+                }
+                finally
+                {
+                    // Close the connection in the finally block to ensure it's always closed
+                    if (con.State == ConnectionState.Open)
+                    {
+                        con.Close();
+                    }
+                }
+            }
+        }
+
+
     }
 }

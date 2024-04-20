@@ -67,24 +67,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="IMAGES\1.jpg" />
-    <Content Include="IMAGES\2.jfif" />
-    <Content Include="IMAGES\3.jfif" />
-    <Content Include="IMAGES\4.jfif" />
-    <Content Include="IMAGES\5.jfif" />
-    <Content Include="IMAGES\6.jfif" />
-    <Content Include="IMAGES\7.jpg" />
-    <Content Include="IMAGES\8.jfif" />
-    <Content Include="IMAGES\9.jfif" />
-    <Content Include="IMAGES\S3.jfif" />
-    <Content Include="IMAGES\S5.jpg" />
-    <Content Include="IMAGES\SLIDE1.png" />
-    <Content Include="IMAGES\SLIDE2.jfif" />
-    <Content Include="IMAGES\SLIDE3.jfif" />
-    <Content Include="IMAGES\SLIDE4.jfif" />
-    <Content Include="IMAGES\test1.jpg" />
-    <Content Include="IMAGES\test2.jfif" />
-    <Content Include="IMAGES\test3.jpg" />
+    <Content Include="IMAGES\AD.jpg" />
+    <Content Include="IMAGES\asiandelight.jpg" />
+    <Content Include="IMAGES\Geshas.jpg" />
+    <Content Include="IMAGES\IRA_EVVA.jpg" />
+    <Content Include="IMAGES\monticelllo.jpg" />
+    <Content Include="IMAGES\SLIDE2.png" />
+    <Content Include="IMAGES\ValentynVolkov.jpg" />
     <Content Include="SQL LIBRARY\Create Db.sql" />
     <Content Include="SQL LIBRARY\fun.sql" />
     <Content Include="SQL LIBRARY\search.sql" />
@@ -150,7 +139,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="IMAGES\Ingredients\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

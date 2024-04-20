@@ -5,12 +5,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container mt-5">
-        <h2>Product Management</h2>
+        <center><h2>Add New Ingredients</h2></center>
         <!-- Form for adding/editing products -->
         <asp:Panel ID="panelAddEditProduct" runat="server" DefaultButton="btnSaveProduct">
             <asp:HiddenField ID="hfProductID" runat="server" Value="0" />
             <div class="form-group">
-                <label for="txtProductName">Product Name:</label>
+                <label  for="txtProductName">Enter Ingredient Name:</label>
                 <asp:TextBox ID="txtProductName" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="form-group">
@@ -22,7 +22,7 @@
                 <asp:TextBox ID="txttags" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
             </div>
             <div class="form-group">
-                <label for="txtDescription">Perfume Ingridents:</label>
+                <label for="txtDescription">How To Use(Label Print)</label>
                 <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
             </div>
             <div class="form-group">
@@ -50,9 +50,11 @@
                  <asp:Label ID="lblNotification" runat="server" CssClass="form-control" Text="record nessage"  Visible="false"></asp:Label>
             </div>
           
-            <asp:Button ID="btnSaveProduct" runat="server" Text="Save Product" CssClass="btn btn-primary" OnClick="btnSaveProduct_Click" />
+            <asp:Button ID="btnSaveProduct" CssClass="btn btn-primary" runat="server"  OnClick="btnSaveProduct_Click" Text="Save Product" />
+
         </asp:Panel>
 
         
     </div>
 </asp:Content>
+ 

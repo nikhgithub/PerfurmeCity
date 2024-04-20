@@ -85,5 +85,24 @@ namespace PerfurmeCity.DATA
 
             return isInserted;
         }
+        public DataTable GetProductsFromDatabase()
+        {
+            // Your database connection logic here
+            DataTable dt = new DataTable();
+            // Your SQL query to fetch products
+            string query = "SELECT ProductName, Description, Tags, Price, Discount, Gender, ImageUrl FROM Products";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    con.Open();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
     }
 }

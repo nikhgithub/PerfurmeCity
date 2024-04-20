@@ -16,8 +16,41 @@ namespace PerfurmeCity.MASTERPAGES
                 // Retrieve the search text from session and set it to the text box
                 if (Session["SearchText"] != null)
                     txtsearchengine.Text = Session["SearchText"].ToString();
+                // Check if user is logged in
+                if (Session["IsLoggedIn"] != null && (bool)Session["IsLoggedIn"])
+                {
+                    // If user is logged in, display logout option
+                    btnSignInSignUp.Text = "Logout";
+                    // lnkSignInSignUp.NavigateUrl = "Home.aspx"; // Specify the logout page URL
+                }
+                else
+                {
+                    // If user is not logged in, display signin/signup option
+                    btnSignInSignUp.Text = "SignIn-SigUp";
+                    //Response.Redirect("~/UI/SigIn.aspx");
+                    // lnkSignInSignUp.NavigateUrl = "#"; // Specify the signin/signup page URL
+                }
             }
+            //if (btnSignInSignUp.Text = "SignIn-SigUp";)
 
+
+        }
+
+        protected void btnSignInSignUp_Click(object sender, EventArgs e)
+        {
+            if (btnSignInSignUp.Text == "Logout")
+            {
+                // Clear session or authentication cookies to log out the user
+                Session.Clear(); // Clear all session variables
+                Session.Abandon(); // 
+                btnSignInSignUp.Text ="LogIn-Again?";
+                Response.Redirect("~/UI/Home.aspx");
+            }
+            else
+            {
+                btnSignInSignUp.Text = "SignIn-SigUp";
+                Response.Redirect("~/UI/SigIn.aspx");
+            }
         }
 
         protected void Unnamed_Click(object sender, EventArgs e)

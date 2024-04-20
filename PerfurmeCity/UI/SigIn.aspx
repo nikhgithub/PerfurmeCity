@@ -48,7 +48,7 @@
                         <asp:Label ID="lblLoginError" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
                         <asp:TextBox ID="txtLoginEmailOrMobile" runat="server" CssClass="form-control mb-3" placeholder="Email or Mobile Number" AutoPostBack="true" Style="background-color: #333; color: white; border-color: #333;"></asp:TextBox>
                         <asp:TextBox ID="txtLoginPassword" runat="server" TextMode="Password" CssClass="form-control mb-3" placeholder="Password" Style="background-color: #333; color: white; border-color: #333;"></asp:TextBox>
-                        <asp:Button ID="btnSignIn" runat="server" Text="Sign In" CssClass="btn btn-primary btn-block" Style="background-color: #007bff; border-color: #007bff;" />
+                        <asp:Button ID="btnSignIn" runat="server" Text="Sign In" OnClick="btnLogin_Click" CssClass="btn btn-primary btn-block" Style="background-color: #007bff; border-color: #007bff;" />
                     </div>
                 </div>
             </div>

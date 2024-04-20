@@ -98,34 +98,33 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home</a>
+                            <a class="nav-link" href="Home.aspx">Home</a>
                         </li>
                         <!-- Dropdown Menus for Categories -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Men's
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Eau de Toilette</a>
-                                <a class="dropdown-item" href="#">Eau de Parfum</a>
-                                <a class="dropdown-item" href="#">Cologne</a>
+                                <a class="dropdown-item" href="#">Men's Special Collection</a>
+                                <a class="dropdown-item" href="#">Suggestions</a>
+                                <a class="dropdown-item" href="#">Contact Team</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Women's
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Eau de Toilette</a>
-                                <a class="dropdown-item" href="#">Eau de Parfum</a>
-                                <a class="dropdown-item" href="#">Perfume</a>
+                                <a class="dropdown-item" href="#">Women's Special Collection</a>
+                                <a class="dropdown-item" href="#">Suggestions</a>
+                                <a class="dropdown-item" href="#">Contact Team</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unisex
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Eau de Toilette</a>
-                                <a class="dropdown-item" href="#">Eau de Parfum</a>
-                                <a class="dropdown-item" href="#">Cologne</a>
+                                <a class="dropdown-item" href="#">Suggestions</a>
+                                <a class="dropdown-item" href="#">Contact Team</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -142,11 +141,11 @@
                         </li>--%>
                     </ul>
                     <!-- Search Bar -->
-                   <span id="cartCount" runat="server"></span>
+                    <span id="cartCount" runat="server"></span>
 
 
                     <form class="form-inline my-2 my-lg-0">
-                        <asp:TextBox ID="txtsearchengine" runat="server" class="form-control mr-sm-2" type="search" Style="width: 600px" placeholder="Search perfume by your ingredients" aria-label="Search"></asp:TextBox>
+                        <asp:TextBox ID="txtsearchengine" runat="server" class="form-control mr-sm-2" type="search" Style="width: 600px" placeholder="Search by ingredients" aria-label="Search"></asp:TextBox>
                         <asp:Button class="btn btn-outline-light my-2 my-sm-0" runat="server" ID="searchparm" Text="search" OnClick="Unnamed_Click" type="submit" />
                     </form>
                     <!-- End of Search Bar -->
@@ -154,8 +153,10 @@
                         <%--  <li class="nav-item">
                             <a class="nav-link" href="#">Sign In</a>
                         </li>--%>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">SignIn-SigUp</a>
+                        <li>
+                            <%--<asp:HyperLink ID="lnkSignInSignUp" runat="server"   CssClass="nav-link"></asp:HyperLink>--%>
+                            <asp:Button ID="btnSignInSignUp" runat="server" CssClass="btn btn-primary" OnClick="btnSignInSignUp_Click" Text="SignIn-SigUp" />
+
                         </li>
                     </ul>
 
