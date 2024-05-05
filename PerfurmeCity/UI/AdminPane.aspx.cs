@@ -27,56 +27,51 @@ namespace PerfurmeCity.UI
 
             int value = ddlGenderFilter.SelectedIndex;
 
-            Products newproduct = new Products();
-            newproduct.productName = txtProductName.Text;
-            newproduct.prodcutDescription = txtDescription.Text;
-            newproduct.productImageURL = fileUploadProductImage.FileName;
-            newproduct.ProductGender = ddlGenderFilter.SelectedItem.Value;
-            newproduct.ProductPrice = Convert.ToInt32(txtPrice.Text);
-            newproduct.ProductDiscount = Convert.ToDecimal(txtOffer.Text);
-            newproduct.Producttags = txttags.Text;
+            Ingridients newproduct = new Ingridients();
+            newproduct.IngridientsName = txtProductName.Text;
+            newproduct.IngridientsDescription = txtDescription.Text;
+            newproduct.IngridientsImageURL = Path.GetFileName(fileUploadProductImage.FileName);
+            newproduct.IngridientsGender = ddlGenderFilter.SelectedItem.Value;
+            newproduct.IngridientsPrice = Convert.ToInt32(txtPrice.Text);
+            newproduct.IngridientsDiscount = Convert.ToDecimal(txtOffer.Text);
+            newproduct.Ingridientstags = txttags.Text;
             SaveProductInformation(newproduct);
 
 
 
         }
-        protected void SaveProductInformation(Products product)
+        protected void SaveProductInformation(Ingridients ingridients)
         {
             // Check if a file was uploaded
             if (fileUploadProductImage.HasFile)
             {
                 try
                 {
-                    string fileName = Path.GetFileName(product.productImageURL);
-                    string folderPath = Server.MapPath("~/IMAGES/Ingredients/");
+                    string filename = Path.GetFileName(ingridients.IngridientsImageURL);
+                    string folderPath = Server.MapPath("~/IMAGES/ServerImage/");
 
                     // Ensure the directory exists
                     if (!Directory.Exists(folderPath))
                     {
                         Directory.CreateDirectory(folderPath);
                     }
-
-                    // Generate a unique name for the file to avoid name conflicts
-                    string uniqueFileName = fileName;
-                    string fullPath = folderPath + uniqueFileName;
+                    string fullPath = folderPath + filename;
 
                     // Save the file to the specified folder
                     fileUploadProductImage.SaveAs(fullPath);
 
-                    // Create a new product instance and set properties
-                    Products newProduct = new Products
+                    Ingridients ingridient = new Ingridients
                     {
-                        productName = txtProductName.Text,
-                        prodcutDescription = txtDescription.Text,
-                        productImageURL = "~/IMAGES/Ingredients/" + uniqueFileName, // Save the relative path
-                        ProductGender = ddlGenderFilter.SelectedItem.Value,
-                        ProductPrice = Convert.ToInt32(txtPrice.Text),
-                        ProductDiscount = Convert.ToDecimal(txtOffer.Text),
-                        Producttags = txttags.Text
+                        IngridientsName = ingridients.IngridientsName,
+                        IngridientsDescription = ingridients.IngridientsDescription,
+                        IngridientsImageURL = "~/IMAGES/ServerImage/" + filename,
+                        Ingridientstags = ingridients.Ingridientstags,
+                        IngridientsDiscount = Convert.ToDecimal(ingridients.IngridientsDiscount),
+                        IngridientsPrice = Convert.ToDecimal(ingridients.IngridientsPrice)
                     };
-
+                    DataAccess dao = new DataAccess();
                     // Save product information in the database
-                    SaveProductInformation(newProduct);
+                    dao.SaveIngredient(ingridient);
                     btnSaveProduct.Text = "Save";
                 }
                 catch (Exception ex)

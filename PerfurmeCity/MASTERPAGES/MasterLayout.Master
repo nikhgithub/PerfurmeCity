@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Perfume City</title>
+    <title>Perfume Palace</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -91,7 +91,7 @@
             <!-- Navigation Bar -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <!-- Changed to navbar-dark bg-dark for theme -->
-                <a class="navbar-brand" href="#">Perfume City</a>
+                <a class="navbar-brand" href="#">Perfume Palace</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -130,15 +130,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Products.aspx">Products</a>
                         </li>
-
-                        <%-- <!-- New Enquiry Link -->
                         <li class="nav-item">
-                            <a class="nav-link" href="Enquiry.aspx">Enquiry</a>
+                            <a class="nav-link" href="OurIngridents.aspx">Ingridents</a>
                         </li>
-                        <!-- New About Us Link -->
                         <li class="nav-item">
-                            <a class="nav-link" href="AboutUs.aspx">About Us</a>
-                        </li>--%>
+                            <a class="nav-link" href="CartPage.aspx">View Cart</a>
+                        </li>
+
                     </ul>
                     <!-- Search Bar -->
                     <span id="cartCount" runat="server"></span>

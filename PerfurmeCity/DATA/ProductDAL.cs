@@ -48,6 +48,41 @@ namespace PerfurmeCity.DATA
 
         }
 
+        public void SaveIngredient(Ingridients ingredient)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = @"
+                INSERT INTO Ingredients 
+                (IngredientsName, IngredientsDescription, IngredientsPrice, IngredientsTags, IngredientsDiscount, IngredientsGender, IngredientsImageURL, IngredientsCreatedDate, IngredientsIsActive) 
+                VALUES 
+                (@Name, @Description, @Price, @Tags, @Discount, @Gender, @ImageURL, @CreatedDate, @IsActive)
+            ";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Name", ingredient.IngridientsName);
+                command.Parameters.AddWithValue("@Description", ingredient.IngridientsDescription);
+                command.Parameters.AddWithValue("@Price", ingredient.IngridientsPrice);
+                command.Parameters.AddWithValue("@Tags", ingredient.Ingridientstags ?? (object)DBNull.Value); // Handle null values
+                command.Parameters.AddWithValue("@Discount", ingredient.IngridientsDiscount);
+                command.Parameters.AddWithValue("@Gender", ingredient.IngridientsGender ?? (object)DBNull.Value); // Handle null values
+                command.Parameters.AddWithValue("@ImageURL", ingredient.IngridientsImageURL ?? (object)DBNull.Value); // Handle null values
+                command.Parameters.AddWithValue("@CreatedDate", DateTime.Now); // Use the current date and time
+                command.Parameters.AddWithValue("@IsActive", ingredient.IngridientsIsActive);
+
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions
+                }
+            }
+        }
+
+
         public bool SaveProductInfo(Products newproduct)
         {
             bool isInserted = false;

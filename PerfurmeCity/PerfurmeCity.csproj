@@ -67,11 +67,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="IMAGES\1.jpg" />
+    <Content Include="IMAGES\2.jfif" />
+    <Content Include="IMAGES\3.jfif" />
+    <Content Include="IMAGES\4.jfif" />
+    <Content Include="IMAGES\5.jfif" />
+    <Content Include="IMAGES\9.jfif" />
     <Content Include="IMAGES\AD.jpg" />
     <Content Include="IMAGES\asiandelight.jpg" />
+    <Content Include="IMAGES\DEF2.jpg" />
     <Content Include="IMAGES\Geshas.jpg" />
     <Content Include="IMAGES\IRA_EVVA.jpg" />
     <Content Include="IMAGES\monticelllo.jpg" />
+    <Content Include="IMAGES\ServerImage\monticelllo.jpg" />
     <Content Include="IMAGES\SLIDE2.png" />
     <Content Include="IMAGES\ValentynVolkov.jpg" />
     <Content Include="SQL LIBRARY\Create Db.sql" />
@@ -82,7 +90,9 @@
     <Content Include="SQL LIBRARY\table_createproduct.sql" />
     <Content Include="SQL LIBRARY\Users_table.sql" />
     <Content Include="UI\AdminPane.aspx" />
+    <Content Include="UI\CartPage.aspx" />
     <Content Include="UI\Home.aspx" />
+    <Content Include="UI\OurIngridents.aspx" />
     <Content Include="UI\SearchResults.aspx" />
     <Content Include="UI\SigIn.aspx" />
     <Content Include="Web.config" />
@@ -97,6 +107,8 @@
     <Compile Include="MASTERPAGES\MasterLayout.Master.designer.cs">
       <DependentUpon>MasterLayout.Master</DependentUpon>
     </Compile>
+    <Compile Include="MODELS\CartItems.cs" />
+    <Compile Include="MODELS\Ingridients.cs" />
     <Compile Include="MODELS\Products.cs" />
     <Compile Include="MODELS\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,12 +119,26 @@
     <Compile Include="UI\AdminPane.aspx.designer.cs">
       <DependentUpon>AdminPane.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UI\CartPage.aspx.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\CartPage.aspx.designer.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UI\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OurIngridents.aspx.cs">
+      <DependentUpon>OurIngridents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\OurIngridents.aspx.designer.cs">
+      <DependentUpon>OurIngridents.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\SearchResults.aspx.cs">
       <DependentUpon>SearchResults.aspx</DependentUpon>
@@ -131,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MASTERPAGES\MasterLayout.Master" />
+    <Content Include="IMAGES\VALUE ADON DOCUMENT.docx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

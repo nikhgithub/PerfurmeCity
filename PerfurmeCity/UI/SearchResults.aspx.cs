@@ -27,11 +27,8 @@ namespace PerfurmeCity.UI
                     getsearchresults(paramValue);
                     // Now you can use paramValue in your code
                     // For example, you can set it as the text of a label
-
                 }
-
             }
-
         }
 
         protected void getsearchresults(string searchparams)
@@ -47,20 +44,22 @@ namespace PerfurmeCity.UI
                 string description = row["Description"].ToString();
                 string tags = row["Tags"].ToString();
                 string price = row["Price"].ToString();
-
+                string imageUrl = row["ImageUrl"].ToString();  // Assuming the image URL is stored in this column
                 sb.Append($@"
-<div class='card'>
-    <div class='card-body'>
-        <h5 class='card-title'>{productName}</h5>
-        <p class='card-text'>{description}</p>
-        <p class='card-text'><small class='text-muted'>Tags: {tags}</small></p>
-        <p class='card-text'>Price: ${price}</p>
-        <button class='btn btn-primary' onclick='addToCart({i})'>Add to Cart</button>
-    </div>
-</div>");
+                <div class='card' style='width: 18rem;'>
+                     <asp:Image runat=""server"" ImageUrl={imageUrl} class='card-img-top' alt='Product image' />
+                    <div class='card-body'>
+                        <h5 class='card-title'>{productName}</h5>
+                        <p class='card-text'>{description}</p>
+                        <p class='card-text'><small class='text-muted'>Tags: {tags}</small></p>
+                        <p class='card-text'>Price: ${price}</p>
+                        <button class='btn btn-primary' onclick='addToCart({i})'>Add to Cart</button>
+                    </div>
+                </div>");
             }
 
             cardContainer.InnerHtml = sb.ToString();
+
         }
 
 
