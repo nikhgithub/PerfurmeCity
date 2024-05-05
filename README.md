@@ -13,3 +13,5 @@ Business Access layer contains the business logic for perfurming cruds on Orders
 
 #UI
 Asp.net UI pages are active server pages, from UI folder created separate views for Logim, Singin/sinup , home , Search engine and also admin page
+
+ex:
