@@ -5,65 +5,112 @@
         .cart-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: #fff;
         }
 
         .cart-item {
-            width: calc(25% - 20px); /* Adjust width to fit 4 items per row with gap */
-            background-color: #f8f9fa; /* Light background color */
-            border: 1px solid #dee2e6; /* Gray border */
-            padding: 20px;
+            width: 200px;
+            padding: 10px;
+            margin: 10px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .item-details {
-            display: flex;
+            .cart-item img {
+                width: 100%;
+                border-radius: 5px;
+            }
+
+            .cart-item h3 {
+                font-size: 16px;
+                margin: 10px 0;
+            }
+
+            .cart-item .controls {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .cart-item .delete-symbol {
+                font-size: 18px;
+                color: #ff4d4d;
+                cursor: pointer;
+            }
+
+                .cart-item .delete-symbol:hover {
+                    color: #e60000;
+                }
+
+        #btnBuyNow {
+            margin-top: auto; /* Aligns button to bottom of container */
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .item-image {
-            width: 100px; /* Adjust image width */
-            height: 100px; /* Adjust image height */
-            margin-right: 20px; /* Add space between image and info */
-        }
-
-        .item-info h3 {
-            margin-top: 0; /* Remove default margin */
-        }
-
-        .buy-now-container {
-            width: 100%;
-            text-align: center;
-            margin-top: 20px; /* Add space between items and button */
-        }
-
-        .buy-now-button {
-            padding: 10px 20px; /* Adjust button padding */
-            font-size: 16px; /* Adjust font size */
-            border-radius: 5px; /* Rounded corners */
-            background-color: #007bff; /* Blue color */
-            color: #fff; /* White text color */
-            border: none; /* Remove border */
-        }
-
-            .buy-now-button:hover {
-                background-color: #0056b3; /* Darker blue on hover */
-                cursor: pointer; /* Change cursor on hover */
+            #btnBuyNow:hover {
+                background-color: #45a049;
             }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <script>
+        function deleteCartItem(cartDetailID) {
+            if (confirm("Are you sure you want to delete this item from your cart?" + cartDetailID)) {
+                // Call backend function to delete cart item using AJAX
+                // Example using jQuery AJAX
+                $.ajax({
+                    type: "POST",
+                    url: "DeleteCartItem.aspx",
+                    data: { cartDetailID: cartDetailID },
+                    success: function (response) {
+                        // Refresh the cart items after deletion
+                        // Example: Reload the page
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                        alert("Failed to delete cart item.");
+                    }
+                });
+            }
+        }
+
+    </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
-        <h2>Cart Items</h2>
+
+        <center>
+            <h2>Cart Items</h2>
+        </center>
+    </div>
+    <div class="cart-container">
         <asp:Repeater ID="rptCartItems" runat="server">
             <ItemTemplate>
                 <div class="cart-item">
-                    <asp:Image ID="imgItem" runat="server" Width="100" Height="100" />
+                    <asp:Image ID="imgItem" runat="server" Width="150" Height="150" ImageUrl='<%# Eval("IngredientsImageURL") %>' />
                     <h3><%# Eval("IngredientName") %></h3>
-                    <!-- Add other item details here -->
-                    <asp:CheckBox ID="chkSelect" runat="server" />
+                    <div class="controls">
+                        <asp:CheckBox ID="chkSelect" runat="server" CssClass="checkbox-label" />
+                        <span class="delete-symbol" onclick="deleteCartItem(<%# Eval("CartDetailID") %>);">&#10006;</span>
+                    </div>
                 </div>
             </ItemTemplate>
         </asp:Repeater>
-        <asp:Button ID="btnBuyNow" runat="server" Text="Buy Now" />
-    </div>
 
+    </div>
+    <div>
+        <asp:Button ID="btnBuyNow" runat="server" Text="Buy Now" CssClass="btn btn-primary" />
+    </div>
 </asp:Content>

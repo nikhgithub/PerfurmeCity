@@ -91,6 +91,7 @@
     <Content Include="SQL LIBRARY\Users_table.sql" />
     <Content Include="UI\AdminPane.aspx" />
     <Content Include="UI\CartPage.aspx" />
+    <Content Include="UI\DeleteCartItem.aspx" />
     <Content Include="UI\Home.aspx" />
     <Content Include="UI\OurIngridents.aspx" />
     <Content Include="UI\SearchResults.aspx" />
@@ -125,6 +126,13 @@
     </Compile>
     <Compile Include="UI\CartPage.aspx.designer.cs">
       <DependentUpon>CartPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DeleteCartItem.aspx.cs">
+      <DependentUpon>DeleteCartItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\DeleteCartItem.aspx.designer.cs">
+      <DependentUpon>DeleteCartItem.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

@@ -228,11 +228,13 @@ namespace PerfurmeCity.DATA
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = @"SELECT CD.CartDetailID, CD.UserID, CD.IngredientID, CD.Quantity, CD.AddedDate, 
-                         I.IngredientsID, I.IngredientsName, I.IngredientsPrice 
-                         FROM CartDetails CD 
-                         INNER JOIN Ingredients I ON CD.IngredientID = I.IngredientsID 
-                         WHERE CD.UserID = @UserID";
+                string query = @"
+    SELECT CD.CartDetailID, CD.UserID, CD.IngredientID, CD.Quantity, CD.AddedDate, 
+           I.IngredientsID, I.IngredientsName, I.IngredientsPrice, I.IngredientsImageURL
+    FROM CartDetails CD 
+    INNER JOIN Ingredients I ON CD.IngredientID = I.IngredientsID 
+    WHERE CD.UserID = @UserID";
+
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -252,7 +254,8 @@ namespace PerfurmeCity.DATA
                                 Quantity = Convert.ToInt32(reader["Quantity"]),
                                 AddedDate = Convert.ToDateTime(reader["AddedDate"]),
                                 IngredientName = reader["IngredientsName"].ToString(),
-                                Price = Convert.ToDecimal(reader["IngredientsPrice"])
+                                Price = Convert.ToDecimal(reader["IngredientsPrice"]),
+                                IngredientsImageURL = Convert.ToString(reader["IngredientsImageURL"])
                                 // Add other properties as needed
                             };
                             cartDetails.Add(cartDetail);
@@ -263,6 +266,29 @@ namespace PerfurmeCity.DATA
 
             return cartDetails;
         }
+        public int DeleteCartDetail(int cartDetailID)
+        {
+            int rowsAffected = 0;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM CartDetails WHERE CartDetailID = @CartDetailID";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CartDetailID", cartDetailID);
+
+                    connection.Open();
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+
+            return rowsAffected;
+        }
+
+
+
+
 
 
 
@@ -278,5 +304,7 @@ public class CartDetail
     public DateTime AddedDate { get; set; }
     public string IngredientName { get; set; }
     public decimal Price { get; set; }
+
+    public string IngredientsImageURL { get; set; }
     // Add other properties as needed
 }
