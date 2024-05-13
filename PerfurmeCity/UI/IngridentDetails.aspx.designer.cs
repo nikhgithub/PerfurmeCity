@@ -11,25 +11,34 @@ namespace PerfurmeCity.UI
 {
 
 
-    public partial class CartPage
+    public partial class IngridentDetails
     {
 
         /// <summary>
-        /// rptCartItems control.
+        /// imgIngredient control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptCartItems;
+        protected global::System.Web.UI.WebControls.Image imgIngredient;
 
         /// <summary>
-        /// rptRecommendedProducts control.
+        /// lblIngredientName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptRecommendedProducts;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblIngredientName;
+
+        /// <summary>
+        /// lblIngredientDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblIngredientDescription;
     }
 }

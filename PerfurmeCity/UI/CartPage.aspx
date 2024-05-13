@@ -30,6 +30,11 @@
                 margin: 10px 0;
             }
 
+            .cart-item .price {
+                font-size: 14px;
+                margin-bottom: 5px;
+            }
+
             .cart-item .controls {
                 display: flex;
                 justify-content: space-between;
@@ -48,6 +53,7 @@
 
         #btnBuyNow {
             margin-top: auto; /* Aligns button to bottom of container */
+            margin-bottom: 20px; /* Add space below button */
             padding: 10px 20px;
             background-color: #4CAF50;
             color: #fff;
@@ -59,13 +65,63 @@
             #btnBuyNow:hover {
                 background-color: #45a049;
             }
+
+        .recommendation-container {
+            margin-top: 20px;
+        }
+
+        .recommended-products-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px;
+        }
+
+        .recommended-product {
+            flex: 0 0 auto;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .recommended-image {
+            width: 100px; /* Adjust the width as needed */
+            height: auto;
+            display: block;
+        }
+
+        .arrow-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .arrow {
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+            .arrow:hover {
+                background-color: #555;
+            }
+
+        .prev {
+            transform: rotate(180deg);
+        }
     </style>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <script>
         function deleteCartItem(cartDetailID) {
-            if (confirm("Are you sure you want to delete this item from your cart?" + cartDetailID)) {
+            if (confirm("Are you sure you want to delete this item from your cart?")) {
                 // Call backend function to delete cart item using AJAX
                 // Example using jQuery AJAX
                 $.ajax({
@@ -84,15 +140,20 @@
                 });
             }
         }
-
+        function scrollProducts(direction) {
+            const container = document.querySelector('.recommended-products-wrapper');
+            container.scrollBy({
+                left: container.offsetWidth * direction,
+                behavior: 'smooth'
+            });
+        }
     </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
-
         <center>
-            <h2>Cart Items</h2>
+            <h2>CART DETIALS</h2>
         </center>
     </div>
     <div class="cart-container">
@@ -101,16 +162,39 @@
                 <div class="cart-item">
                     <asp:Image ID="imgItem" runat="server" Width="150" Height="150" ImageUrl='<%# Eval("IngredientsImageURL") %>' />
                     <h3><%# Eval("IngredientName") %></h3>
+                    <p class="price">Price: $<%# Eval("Price") %></p>
                     <div class="controls">
-                        <asp:CheckBox ID="chkSelect" runat="server" CssClass="checkbox-label" />
                         <span class="delete-symbol" onclick="deleteCartItem(<%# Eval("CartDetailID") %>);">&#10006;</span>
                     </div>
                 </div>
             </ItemTemplate>
         </asp:Repeater>
+    </div>
+    <asp:Repeater ID="rptRecommendedProducts" runat="server">
+        <HeaderTemplate>
+            <div class="recommendation-container">
+                <h2>Similar Products</h2>
+                <div class="recommended-products-wrapper">
+        </HeaderTemplate>
+        <ItemTemplate>
+            <div class="recommended-product">
+                <asp:HyperLink ID="hlIngridentDetails" runat="server" NavigateUrl='<%# "IngridentDetails.aspx?IngredientsID=" + Eval("IngredientsID") %>'>
+                    <asp:Image ID="imgRecommendedProduct" runat="server" ImageUrl='<%# Eval("IngredientsImageURL") %>' CssClass="recommended-image" AlternateText='<%# Eval("IngredientsName") %>' />
+                </asp:HyperLink>
+            </div>
+        </ItemTemplate>
+        <FooterTemplate>
+            </div>
+    <!-- Close recommended-products-wrapper -->
+            <div class="arrow-wrapper">
+                <button class="arrow prev" onclick="scrollProducts(-1)">&#10094;</button>
+                <button class="arrow next" onclick="scrollProducts(1)">&#10095;</button>
+            </div>
+        </FooterTemplate>
+    </asp:Repeater>
 
-    </div>
-    <div>
-        <asp:Button ID="btnBuyNow" runat="server" Text="Buy Now" CssClass="btn btn-primary" />
-    </div>
+
+
+
+
 </asp:Content>

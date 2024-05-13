@@ -93,8 +93,10 @@
     <Content Include="UI\CartPage.aspx" />
     <Content Include="UI\DeleteCartItem.aspx" />
     <Content Include="UI\Home.aspx" />
+    <Content Include="UI\IngridentDetails.aspx" />
     <Content Include="UI\OurIngridents.aspx" />
     <Content Include="UI\SearchResults.aspx" />
+    <Content Include="UI\ShippingAddress.aspx" />
     <Content Include="UI\SigIn.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -141,6 +143,13 @@
     <Compile Include="UI\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UI\IngridentDetails.aspx.cs">
+      <DependentUpon>IngridentDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\IngridentDetails.aspx.designer.cs">
+      <DependentUpon>IngridentDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\OurIngridents.aspx.cs">
       <DependentUpon>OurIngridents.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -154,6 +163,13 @@
     </Compile>
     <Compile Include="UI\SearchResults.aspx.designer.cs">
       <DependentUpon>SearchResults.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ShippingAddress.aspx.cs">
+      <DependentUpon>ShippingAddress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\ShippingAddress.aspx.designer.cs">
+      <DependentUpon>ShippingAddress.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\SigIn.aspx.cs">
       <DependentUpon>SigIn.aspx</DependentUpon>

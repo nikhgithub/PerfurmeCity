@@ -286,7 +286,62 @@ namespace PerfurmeCity.DATA
             return rowsAffected;
         }
 
+        public DataTable ExecuteQueryForRecommendation(int firstCartId)
+        {
+            DataTable recommendedProducts = new DataTable();
 
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = @"
+            SELECT * FROM Ingredients ORDER BY IngredientsPrice;";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@FirstCartId", firstCartId);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    adapter.Fill(recommendedProducts);
+                }
+                catch (Exception ex)
+                {
+                    // Handle exception
+                    Console.WriteLine("Error executing recommendation query: " + ex.Message);
+                }
+            }
+
+            return recommendedProducts;
+        }
+
+        //get data by ingrident
+        public DataTable GetIngredientDetailsByID(string ingredientsID)
+        {
+            DataTable dtIngredient = new DataTable();
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    // SQL query to select ingredient details based on ID
+                    string query = "SELECT * FROM Ingredients WHERE IngredientsID = @IngredientsID";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@IngredientsID", ingredientsID);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    con.Open();
+                    da.Fill(dtIngredient);
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions
+                    throw ex;
+                }
+            }
+
+            return dtIngredient;
+        }
 
 
 
