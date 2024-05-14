@@ -125,6 +125,11 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
+        .your-css-class-name {
+            display: inline-block;
+            margin-right: 10px; /* Adjust spacing between buttons */
+        }
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -183,8 +188,9 @@
     </div>
     <div>
         <asp:Button ID="btncartdetails" runat="server" CssClass="your-css-class-name" OnClick="btnBuyNow_Click" Text="PLACE ORDER" />
-
+        <asp:Button ID="Button1" runat="server" CssClass="your-css-class-name" OnClick="Button1_Click" Text="View My Orders" />
     </div>
+
     <asp:Repeater ID="rptRecommendedProducts" runat="server">
         <HeaderTemplate>
             <div class="recommendation-container">

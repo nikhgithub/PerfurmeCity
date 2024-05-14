@@ -13,6 +13,7 @@ namespace PerfurmeCity.UI
 {
     public partial class OurIngridents : System.Web.UI.Page
     {
+        string userId = ""; // Default value
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -20,6 +21,11 @@ namespace PerfurmeCity.UI
             {
                 // Call a method to fetch ingredients from the database
                 PopulateIngredients();
+               
+                if (Session["UserID"] != null)
+                {
+                    userId = Session["UserID"].ToString();
+                }
             }
         }
         protected void PopulateIngredients()
@@ -37,7 +43,11 @@ namespace PerfurmeCity.UI
         protected void AddToCart_Click(object sender, EventArgs e)
         {
             // Get the user ID (replace "GetUserID" with your method to retrieve the user ID)
-            string userId = "1";
+
+            if (Session["UserID"] != null)
+            {
+                userId = Session["UserID"].ToString();
+            }
 
             // Get the ingredient ID from the CommandArgument of the button
             int ingredientId = int.Parse(((Button)sender).CommandArgument);

@@ -16,6 +16,7 @@ namespace PerfurmeCity.UI
 {
     public partial class SigIn : System.Web.UI.Page
     {
+        int userID = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -43,6 +44,11 @@ namespace PerfurmeCity.UI
 
             if (isAuthenticated == 1)
             {
+                DataAccess dataAccess = new DataAccess();
+                int userId = dataAccess.GetUserIdBasedOnEmailAndPassword(txtLoginEmailOrMobile.Text, txtLoginPassword.Text);
+
+                // Store UserID in Session
+                Session["UserID"] = userId;
                 // Set session variable indicating user is logged in
                 Session["IsLoggedIn"] = true;
                 Response.Redirect("~/UI/Home.aspx"); // Redirect to dashboard or another page after login

@@ -30,6 +30,18 @@ namespace PerfurmeCity.MASTERPAGES
                     //Response.Redirect("~/UI/SigIn.aspx");
                     // lnkSignInSignUp.NavigateUrl = "#"; // Specify the signin/signup page URL
                 }
+                int userId = -1; // Default value
+                if (Session["UserID"] != null)
+                {
+                    userId = Convert.ToInt32(Session["UserID"]);
+                 
+                    if(userId==1)
+                    {
+                        adimpanel.Visible = true;
+                    }
+                }
+
+
             }
             //if (btnSignInSignUp.Text = "SignIn-SigUp";)
 

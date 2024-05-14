@@ -4,6 +4,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="form-group">
+        <asp:Button ID="btnExportToExcel" CssClass="btn btn-success" runat="server" OnClick="btnExportToCSV_Click" Text="Export to Excel" />
+    </div>
+
     <div class="container mt-5">
         <center>
             <h2>Add New Ingredients</h2>

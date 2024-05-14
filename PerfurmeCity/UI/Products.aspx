@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MASTERPAGES/MasterLayout.Master" AutoEventWireup="true" CodeBehind="ProductsByGender.aspx.cs" Inherits="PerfurmeCity.UI.ProductsByGender" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MASTERPAGES/MasterLayout.Master" AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="PerfurmeCity.UI.Products" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -34,20 +34,35 @@
             font-size: 16px;
         }
 
-        /* Details button */
+        /* Details button styling */
         .details-button {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            bottom: 20px; /* Adjust the distance from the bottom */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Center horizontally */
             z-index: 1;
+        }
+
+        .details-button a {
+            display: inline-block;
+            text-align: center;
+            padding: 8px 16px;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .details-button a:hover {
+            background-color: #0056b3;
         }
     </style>
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
         <div class="row">
-            <asp:Repeater ID="rptIngredients" runat="server">
+            <asp:Repeater ID="rptProducts" runat="server">
                 <ItemTemplate>
                     <div class="col-md-4 mb-4">
                         <div class="card animate__animated animate__fadeInUp">
@@ -55,7 +70,10 @@
                             <div class="card-body">
                                 <h5 class="card-title"><%# Eval("IngredientsName") %></h5>
                                 <p class="card-text"><%# Eval("IngredientsDescription") %></p>
-                                <asp:HyperLink runat="server" NavigateUrl='<%# "IngridentDetails.aspx?IngredientsID=" + Eval("IngredientsID") %>' CssClass="btn btn-primary details-button" Text="Details"></asp:HyperLink>
+                                <p class="card-text">Price: $<%# Eval("IngredientsPrice") %></p>
+                            </div>
+                            <div class="details-button">
+                                <asp:HyperLink runat="server" NavigateUrl='<%# "IngridentDetails.aspx?IngredientsID=" + Eval("IngredientsID") %>' Text="Details"></asp:HyperLink>
                             </div>
                         </div>
                     </div>
@@ -64,3 +82,4 @@
         </div>
     </div>
 </asp:Content>
+

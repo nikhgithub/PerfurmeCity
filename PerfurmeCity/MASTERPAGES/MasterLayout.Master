@@ -137,6 +137,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="CartPage.aspx">View Cart</a>
                         </li>
+                          <li class="nav-item">
+      <a runat="server" class="nav-link" id="adimpanel" visible="false"  href="~/UI/AdminPane.aspx">Admin Panel</a>
+  </li>
 
                     </ul>
                     <!-- Search Bar -->

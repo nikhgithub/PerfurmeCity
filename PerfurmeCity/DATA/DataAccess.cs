@@ -510,7 +510,219 @@ namespace PerfurmeCity.DATA
                 }
             }
         }
+        public int GetUserIdBasedOnEmailAndPassword(string email, string password)
+        {
+            int userId = -1; // Default value if user not found
 
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT UserID FROM Users WHERE Email = @Email AND Password = @Password";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@Password", password);
+
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+                if (result != null)
+                {
+                    userId = Convert.ToInt32(result);
+                }
+            }
+
+            return userId;
+        }
+        // Method to save order details from the shipping page
+        public bool SaveOrderFromShippingPage(int userId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    // Open the connection
+                    connection.Open();
+
+                    // Start a new transaction
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        try
+                        {
+                            // Get cart items for the user
+                            DataTable cartItems = GetCartItemsForUser(userId, connection, transaction);
+
+                            // Iterate through cart items and save order details
+                            foreach (DataRow cartItem in cartItems.Rows)
+                            {
+                                int ingredientId = Convert.ToInt32(cartItem["IngredientID"]);
+                                int quantity = Convert.ToInt32(cartItem["Quantity"]);
+
+                                // Save order details for each cart item
+                                SaveOrderDetails(userId, ingredientId, quantity, connection, transaction);
+                            }
+                            DeleteCartItems(userId, connection, transaction);
+
+                            // Commit the transaction if all operations succeed
+                            transaction.Commit();
+                            return true;
+                        }
+                        catch (Exception ex)
+                        {
+                            // Rollback the transaction if an error occurs
+                            transaction.Rollback();
+                            // Log or handle the exception
+                            throw ex;
+                        }
+                    }
+                  
+                }
+                catch (Exception ex)
+                {
+                    // Log or handle the exception
+                    throw ex;
+                }
+            }
+        }
+        // Method to retrieve cart items for a user
+        private DataTable GetCartItemsForUser(int userId, SqlConnection connection, SqlTransaction transaction)
+        {
+            DataTable cartItems = new DataTable();
+            // Execute your SQL query to retrieve cart items for the user
+            // Example:
+            string query = "SELECT * FROM CartDetails WHERE UserID = @UserId";
+            SqlCommand command = new SqlCommand(query, connection, transaction);
+            command.Parameters.AddWithValue("@UserId", userId);
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            adapter.Fill(cartItems);
+            return cartItems;
+        }
+        public DataTable GetAllOrderDetails()
+        {
+            DataTable dtOrders = new DataTable();
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM UsersOrders";
+
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    con.Open();
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dtOrders);
+                }
+            }
+
+            return dtOrders;
+        }
+        private void DeleteCartItems(int userId, SqlConnection connection, SqlTransaction transaction)
+        {
+            // Execute your SQL query to delete cart items for the user
+            string query = "DELETE FROM CartDetails WHERE UserID = @UserId";
+            SqlCommand command = new SqlCommand(query, connection, transaction);
+            command.Parameters.AddWithValue("@UserId", userId);
+            command.ExecuteNonQuery();
+        }
+
+        // Method to save order details for a cart item
+        private void SaveOrderDetails(int userId, int ingredientId, int quantity, SqlConnection connection, SqlTransaction transaction)
+        {
+            // Execute your SQL query to save order details for the cart item
+            // Example:
+            string query = "INSERT INTO UsersOrders (UserID, IngredientID, IngredientName, Quantity, OrderDate) " +
+                           "VALUES (@UserId, @IngredientId, @IngredientName, @Quantity, GETDATE())";
+            SqlCommand command = new SqlCommand(query, connection, transaction);
+            command.Parameters.AddWithValue("@UserId", userId);
+            command.Parameters.AddWithValue("@IngredientId", ingredientId);
+            command.Parameters.AddWithValue("@IngredientName", string.Empty); // Provide an empty string
+            command.Parameters.AddWithValue("@Quantity", quantity);
+
+            command.ExecuteNonQuery();
+        }
+
+
+        public DataTable GetAllProducts()
+        {
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    // SQL query to select all products from Ingredients table where ProductType is "Products"
+                    string query = "SELECT * FROM Ingredients WHERE ProductType = @ProductType";
+
+                    // Create and open the connection
+                    connection.Open();
+
+                    // Create a command with the query and connection
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        // Add parameters
+                        command.Parameters.AddWithValue("@ProductType", "Products");
+
+                        // Create a data adapter to execute the command and fill the DataTable
+                        SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                        dataAdapter.Fill(dataTable);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, log or throw them as needed
+                Console.WriteLine("Error retrieving products: " + ex.Message);
+            }
+
+            return dataTable;
+        }
+        public DataTable GetMyOrders(int userId)
+        {
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    // SQL query to get order details with calculated prices
+                    string query = @"SELECT 
+                                        O.OrderID,
+                                        O.UserID,
+                                        O.IngredientID,
+                                        I.IngredientsName,
+                                        O.Quantity,
+                                        I.IngredientsPrice AS Price,
+                                        O.Quantity * I.IngredientsPrice AS TotalPrice,
+                                        O.ShippingAddressID,
+                                        O.OrderDate
+                                    FROM 
+                                        UsersOrders O
+                                    INNER JOIN 
+                                        Ingredients I ON O.IngredientID = I.IngredientsID
+                                    WHERE 
+                                        O.UserID = @UserID";
+
+                    // Create and open the connection
+                    connection.Open();
+
+                    // Create a command with the query and connection
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        // Add parameters
+                        command.Parameters.AddWithValue("@UserID", userId);
+
+                        // Create a data adapter to execute the command and fill the DataTable
+                        SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                        dataAdapter.Fill(dataTable);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, log or throw them as needed
+                Console.WriteLine("Error retrieving orders: " + ex.Message);
+            }
+
+            return dataTable;
+        }
 
 
     }

@@ -14,23 +14,32 @@ namespace PerfurmeCity.UI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
-                LoadCartItems();
-                LoadRecommendations(1);
+                int userId = -1; // Default value
+                if (Session["UserID"] != null)
+                {
+                    userId = Convert.ToInt32(Session["UserID"]);
+                    LoadCartItems(userId);
+                    LoadRecommendations(userId);
+                }
+
+               
+               
             }
 
         }
-        private void LoadCartItems()
+        private void LoadCartItems(int userid)
         {
             DataAccess dataAccess = new DataAccess();
             // Assuming you have a session variable for the current user ID
-            string userID = "1";
+            string userID = userid.ToString();
 
             if (!string.IsNullOrEmpty(userID))
             {
                 // Call the data access layer method to retrieve cart details for the user
-                List<CartDetail> cartItems = dataAccess.GetCartDetailsByUserID(1);
+                List<CartDetail> cartItems = dataAccess.GetCartDetailsByUserID(userid);
 
                 // Bind the cart items to the Repeater
                 rptCartItems.DataSource = cartItems;
@@ -68,5 +77,9 @@ namespace PerfurmeCity.UI
 
         }
 
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/UI/Myorders.aspx");
+        }
     }
 }

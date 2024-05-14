@@ -15,20 +15,26 @@ namespace PerfurmeCity.UI
 {
     public partial class ShippingAddress : System.Web.UI.Page
     {
+        int userId = -1; // Default value
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                DataAccess dataAccess=new DataAccess();
-                txtTotalPrice.Text = dataAccess.GetTotalPriceInCart(1).ToString("0.00");
+               
+                if (Session["UserID"] != null)
+                {
+                    userId = Convert.ToInt32(Session["UserID"]);
+                }
+                DataAccess dataAccess = new DataAccess();
+                txtTotalPrice.Text = dataAccess.GetTotalPriceInCart(userId).ToString("0.00");
                 // Assuming userID is obtained from user authentication or session
-                int userID = 1; // Replace with actual userID retrieval logic
+                ; // Replace with actual userID retrieval logic
 
                 // Instantiate the DAL
                 DataAccess orderDAL = new DataAccess();
 
                 // Get address details for the user
-                DataTable dtAddress = orderDAL.GetAddressDetails(userID);
+                DataTable dtAddress = orderDAL.GetAddressDetails(userId);
 
                 if (dtAddress.Rows.Count > 0)
                 {
@@ -57,12 +63,22 @@ namespace PerfurmeCity.UI
 
         protected void Unnamed_Click(object sender, EventArgs e)
         {
+            if (Session["UserID"] != null)
+            {
+                userId = Convert.ToInt32(Session["UserID"]);
+            }
             DataAccess dataAccess = new DataAccess();
-            dataAccess.UpdateOrCreateAddress(1, txtAddress1.Text, txtAddress2.Text, txtemailNumber.Text, txtPhoneNumber.Text, txtCity.Text, ddlDeliveryMode.Text, txtZip.Text, "Texas");
+            dataAccess.UpdateOrCreateAddress(userId, txtAddress1.Text, txtAddress2.Text, txtemailNumber.Text, txtPhoneNumber.Text, txtCity.Text, ddlDeliveryMode.Text, txtZip.Text, "Texas");
+            dataAccess.SaveOrderFromShippingPage(userId);
 
             string orderID = dataAccess.GenerateOrderID();
             ScriptManager.RegisterStartupScript(this, GetType(), "showOrderIDPopup", "showOrderIDPopup('our team will contact you your order id" + orderID + "');", true);
         }
+
+        public void saveallitemsincartoOrderdetails()
+        {
+
+        } 
         // Method to generate the HTML email body
         private string GenerateEmailBody(string orderDetails)
         {

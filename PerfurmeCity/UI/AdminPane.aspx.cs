@@ -2,6 +2,7 @@
 using PerfurmeCity.MODELS;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
+
 
 namespace PerfurmeCity.UI
 {
@@ -18,6 +20,11 @@ namespace PerfurmeCity.UI
         {
             if (!IsPostBack)
             {
+                int userId = -1; // Default value
+                if (Session["UserID"] != null)
+                {
+                    userId = Convert.ToInt32(Session["UserID"]);
+                }
 
             }
 
@@ -69,8 +76,8 @@ namespace PerfurmeCity.UI
                         Ingridientstags = ingridients.Ingridientstags,
                         IngridientsDiscount = Convert.ToDecimal(ingridients.IngridientsDiscount),
                         IngridientsPrice = Convert.ToDecimal(ingridients.IngridientsPrice),
-                        IngridientsGender= ingridients.IngridientsGender,
-                        ProductType=ingridients.ProductType,
+                        IngridientsGender = ingridients.IngridientsGender,
+                        ProductType = ingridients.ProductType,
                     };
                     DataAccess dao = new DataAccess();
                     // Save product information in the da
@@ -97,6 +104,49 @@ namespace PerfurmeCity.UI
                 lblNotification.Visible = true;
             }
         }
+        protected void btnExportToCSV_Click(object sender, EventArgs e)
+        {
+            // Retrieve order details from the database using your DAL method
+            DataAccess dataAccess = new DataAccess();
+            DataTable orderDetails = dataAccess.GetAllOrderDetails();
+
+            // Prepare the response for file download
+            Response.Clear();
+            Response.ContentType = "text/csv";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=OrderDetails.csv");
+
+            // Write column headers
+            for (int i = 0; i < orderDetails.Columns.Count; i++)
+            {
+                Response.Write(orderDetails.Columns[i].ColumnName);
+                if (i < orderDetails.Columns.Count - 1)
+                {
+                    Response.Write(",");
+                }
+            }
+            Response.Write(Environment.NewLine);
+
+            // Write data rows
+            foreach (DataRow row in orderDetails.Rows)
+            {
+                for (int i = 0; i < orderDetails.Columns.Count; i++)
+                {
+                    Response.Write(row[i].ToString());
+                    if (i < orderDetails.Columns.Count - 1)
+                    {
+                        Response.Write(",");
+                    }
+                }
+                Response.Write(Environment.NewLine);
+            }
+
+            // End the response
+            Response.End();
+        }
+
+
+
+
 
     }
 }
