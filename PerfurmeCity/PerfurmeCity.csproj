@@ -96,9 +96,14 @@
     <Content Include="IMAGES\ServerImage\monticelllo.jpg" />
     <Content Include="IMAGES\SLIDE2.png" />
     <Content Include="IMAGES\ValentynVolkov.jpg" />
+    <Content Include="SQL LIBRARY\Address.sql" />
+    <Content Include="SQL LIBRARY\Create Cartdetails.sql" />
     <Content Include="SQL LIBRARY\Create Db.sql" />
+    <Content Include="SQL LIBRARY\CreateTable_Ingridents.sql" />
     <Content Include="SQL LIBRARY\fun.sql" />
+    <Content Include="SQL LIBRARY\Orders.sql" />
     <Content Include="SQL LIBRARY\search.sql" />
+    <Content Include="SQL LIBRARY\SP_Login.sql" />
     <Content Include="SQL LIBRARY\SP_newregistrationofuser.sql" />
     <Content Include="SQL LIBRARY\SP_SaveProductInformation.sql" />
     <Content Include="SQL LIBRARY\table_createproduct.sql" />
