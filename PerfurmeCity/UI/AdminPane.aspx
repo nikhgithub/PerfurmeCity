@@ -5,12 +5,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container mt-5">
-        <center><h2>Add New Ingredients</h2></center>
+        <center>
+            <h2>Add New Ingredients</h2>
+        </center>
         <!-- Form for adding/editing products -->
         <asp:Panel ID="panelAddEditProduct" runat="server" DefaultButton="btnSaveProduct">
             <asp:HiddenField ID="hfProductID" runat="server" Value="0" />
             <div class="form-group">
-                <label  for="txtProductName">Enter Ingredient Name:</label>
+                <label for="txtProductName">Enter Ingredient Name:</label>
                 <asp:TextBox ID="txtProductName" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="form-group">
@@ -35,6 +37,14 @@
                 </asp:DropDownList>
             </div>
             <div class="form-group">
+                <asp:Label ID="Label1" runat="server" AssociatedControlID="ddlproductFilter" Text="Filter by Products:"></asp:Label>
+                <asp:DropDownList ID="ddlproductFilter" runat="server" CssClass="form-control">
+                    <asp:ListItem Value="All" Text="ProductType" />
+                    <asp:ListItem Value="Ingrident" Text="Ingrident" />
+                    <asp:ListItem Value="Products" Text="Products" />
+                </asp:DropDownList>
+            </div>
+            <div class="form-group">
                 <label for="fileUploadProductImage">Product Image:</label>
                 <asp:FileUpload ID="fileUploadProductImage" runat="server" CssClass="form-control" />
             </div>
@@ -47,14 +57,13 @@
                 <asp:TextBox ID="txtOffer" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="form-group">
-                 <asp:Label ID="lblNotification" runat="server" CssClass="form-control" Text="record nessage"  Visible="false"></asp:Label>
+                <asp:Label ID="lblNotification" runat="server" CssClass="form-control" Text="record nessage" Visible="false"></asp:Label>
             </div>
-          
-            <asp:Button ID="btnSaveProduct" CssClass="btn btn-primary" runat="server"  OnClick="btnSaveProduct_Click" Text="Save Product" />
+
+            <asp:Button ID="btnSaveProduct" CssClass="btn btn-primary" runat="server" OnClick="btnSaveProduct_Click" Text="Save Product" />
 
         </asp:Panel>
 
-        
+
     </div>
 </asp:Content>
- 

@@ -6,6 +6,10 @@ using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Net.NetworkInformation;
+using PerfurmeCity.DATA;
+using System.Xml.Linq;
 
 namespace PerfurmeCity.UI
 {
@@ -13,47 +17,51 @@ namespace PerfurmeCity.UI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                DataAccess dataAccess=new DataAccess();
+                txtTotalPrice.Text = dataAccess.GetTotalPriceInCart(1).ToString("0.00");
+                // Assuming userID is obtained from user authentication or session
+                int userID = 1; // Replace with actual userID retrieval logic
+
+                // Instantiate the DAL
+                DataAccess orderDAL = new DataAccess();
+
+                // Get address details for the user
+                DataTable dtAddress = orderDAL.GetAddressDetails(userID);
+
+                if (dtAddress.Rows.Count > 0)
+                {
+                    // Populate UI fields with address details
+                    txtAddress1.Text = dtAddress.Rows[0]["Address1"].ToString();
+                    txtAddress2.Text = dtAddress.Rows[0]["Address2"].ToString();
+                    txtemailNumber.Text = dtAddress.Rows[0]["Email"].ToString();
+                    txtPhoneNumber.Text = dtAddress.Rows[0]["Phone"].ToString();
+                    txtCity.Text = dtAddress.Rows[0]["City"].ToString();
+                    txtZip.Text = dtAddress.Rows[0]["ZipCode"].ToString();
+                }
+                else
+                {
+                    // Display empty fields for the user to enter new address details
+                    txtAddress1.Text = "";
+                    txtAddress2.Text = "";
+                    txtemailNumber.Text = "";
+                    txtPhoneNumber.Text = "";
+                    txtCity.Text = "";
+                    txtZip.Text = "";
+                }
+            }
 
         }
+        //DESKTOP-BB9LET8
 
         protected void Unnamed_Click(object sender, EventArgs e)
         {
-            // Sender's email address and password (replace with your own)
-            //string senderEmail = "anupa.gopiraj@gmail.com";
-            //string senderPassword = "abcd@9BBB";
+            DataAccess dataAccess = new DataAccess();
+            dataAccess.UpdateOrCreateAddress(1, txtAddress1.Text, txtAddress2.Text, txtemailNumber.Text, txtPhoneNumber.Text, txtCity.Text, ddlDeliveryMode.Text, txtZip.Text, "Texas");
 
-            //// Sender's email address and password (replace with your own)
-
-            //// Recipient's email address
-            //string recipientEmail = "arjunnandha8@gmail.com";
-
-            //// Create a MailMessage object
-            //MailMessage mailMessage = new MailMessage();
-            //mailMessage.From = new MailAddress(senderEmail);
-            //mailMessage.To.Add(new MailAddress(recipientEmail));
-            //mailMessage.Subject = "Test Email";
-            //mailMessage.Body = "This is a test email.";
-
-            //// Create a SmtpClient object
-            //SmtpClient smtpClient = new SmtpClient();
-            //smtpClient.Host = "smtp.gmail.com"; // For Gmail
-            //smtpClient.Port = 587; // Port for Gmail
-            //smtpClient.EnableSsl = true;
-            //smtpClient.UseDefaultCredentials = false;
-            //smtpClient.Credentials = new NetworkCredential(senderEmail, senderPassword);
-
-            //try
-            //{
-            //    // Send the email
-            //    smtpClient.Send(mailMessage);
-            //    Console.WriteLine("Email Sent Successfully.");
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine("Error: " + ex.Message);
-            //}
-
-
+            string orderID = dataAccess.GenerateOrderID();
+            ScriptManager.RegisterStartupScript(this, GetType(), "showOrderIDPopup", "showOrderIDPopup('our team will contact you your order id" + orderID + "');", true);
         }
         // Method to generate the HTML email body
         private string GenerateEmailBody(string orderDetails)

@@ -188,6 +188,14 @@
             popup.style.display = 'none'; // Hide the popup
         });
 
+        // Get the send button element
+        var sendButton = document.getElementById("sendButton");
+
+        // Add event listener for the send button click
+        sendButton.addEventListener("click", function () {
+            // Show an alert message
+            alert("Our team will contact you soon!");
+        });
     </script>
 </asp:Content>
 
@@ -233,18 +241,13 @@
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
                 <textarea name="message" placeholder="Your Message" required></textarea>
-                <button type="submit">Send</button>
+
             </form>
+            <asp:Button runat="server" ID="sendButton" Text="Send" OnClick="sendButton_Click" />
+
         </div>
 
         <!-- Popup Message -->
-        <div id="popup" class="popup">
-            <div class="popup-content">
-                <span class="close">&times;</span>
-                <p>Thank you for contacting us! Our team will get back to you soon.</p>
-            </div>
-        </div>
+
     </div>
-
-
 </asp:Content>

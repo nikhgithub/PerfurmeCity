@@ -25,6 +25,7 @@ namespace PerfurmeCity.MODELS
         public string IngridientsCreatedDate {  get; set; }
 
         public bool IngridientsIsActive { get; set; }
+        public string ProductType { get; set; }
 
     }
 

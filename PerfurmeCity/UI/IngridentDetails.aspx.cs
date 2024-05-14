@@ -39,7 +39,14 @@ namespace PerfurmeCity.UI
                 }
             }
         }
-      
+        protected void sendButton_Click(object sender, EventArgs e)
+        {
+            // Register JavaScript code to display the alert message
+            string script = "alert('Our team will reach you soon! thank you...!');";
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+        }
+
+
 
     }
 }

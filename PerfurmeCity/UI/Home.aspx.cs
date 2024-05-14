@@ -86,12 +86,12 @@ namespace PerfurmeCity.UI
                 }
 
                 // Set the generated HTML to the cardContainer div
-                cardContainer.InnerHtml = cardsHtml;
+                //cardContainer.InnerHtml = cardsHtml;
             }
             else
             {
                 // If no products found, display a message
-                cardContainer.InnerHtml = "<p>No products found.</p>";
+                //cardContainer.InnerHtml = "<p>No products found.</p>";
             }
         }
 

@@ -79,6 +79,20 @@
     <Content Include="IMAGES\Geshas.jpg" />
     <Content Include="IMAGES\IRA_EVVA.jpg" />
     <Content Include="IMAGES\monticelllo.jpg" />
+    <Content Include="IMAGES\ServerImage\amber.jpg" />
+    <Content Include="IMAGES\ServerImage\ambrette-seed.jpg" />
+    <Content Include="IMAGES\ServerImage\anise.jpg" />
+    <Content Include="IMAGES\ServerImage\asiandelight.jpg" />
+    <Content Include="IMAGES\ServerImage\azzaro.JPG" />
+    <Content Include="IMAGES\ServerImage\benzoin.jpg" />
+    <Content Include="IMAGES\ServerImage\berry.JPG" />
+    <Content Include="IMAGES\ServerImage\black-pepper.jpg" />
+    <Content Include="IMAGES\ServerImage\bloe.JPG" />
+    <Content Include="IMAGES\ServerImage\burberry.JPG" />
+    <Content Include="IMAGES\ServerImage\citizen jav.JPG" />
+    <Content Include="IMAGES\ServerImage\Cologne mankind.JPG" />
+    <Content Include="IMAGES\ServerImage\fahrenh.JPG" />
+    <Content Include="IMAGES\ServerImage\fregramo.JPG" />
     <Content Include="IMAGES\ServerImage\monticelllo.jpg" />
     <Content Include="IMAGES\SLIDE2.png" />
     <Content Include="IMAGES\ValentynVolkov.jpg" />
@@ -95,6 +109,7 @@
     <Content Include="UI\Home.aspx" />
     <Content Include="UI\IngridentDetails.aspx" />
     <Content Include="UI\OurIngridents.aspx" />
+    <Content Include="UI\ProductsByGender.aspx" />
     <Content Include="UI\SearchResults.aspx" />
     <Content Include="UI\ShippingAddress.aspx" />
     <Content Include="UI\SigIn.aspx" />
@@ -156,6 +171,13 @@
     </Compile>
     <Compile Include="UI\OurIngridents.aspx.designer.cs">
       <DependentUpon>OurIngridents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProductsByGender.aspx.cs">
+      <DependentUpon>ProductsByGender.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\ProductsByGender.aspx.designer.cs">
+      <DependentUpon>ProductsByGender.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\SearchResults.aspx.cs">
       <DependentUpon>SearchResults.aspx</DependentUpon>

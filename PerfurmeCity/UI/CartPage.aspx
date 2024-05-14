@@ -114,6 +114,17 @@
         .prev {
             transform: rotate(180deg);
         }
+
+        .your-css-class-name {
+            /* Your CSS styles here */
+            /* For example: */
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -170,6 +181,10 @@
             </ItemTemplate>
         </asp:Repeater>
     </div>
+    <div>
+        <asp:Button ID="btncartdetails" runat="server" CssClass="your-css-class-name" OnClick="btnBuyNow_Click" Text="PLACE ORDER" />
+
+    </div>
     <asp:Repeater ID="rptRecommendedProducts" runat="server">
         <HeaderTemplate>
             <div class="recommendation-container">
@@ -192,9 +207,4 @@
             </div>
         </FooterTemplate>
     </asp:Repeater>
-
-
-
-
-
 </asp:Content>

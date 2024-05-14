@@ -110,9 +110,9 @@ namespace PerfurmeCity.DATA
             {
                 string query = @"
                 INSERT INTO Ingredients 
-                (IngredientsName, IngredientsDescription, IngredientsPrice, IngredientsTags, IngredientsDiscount, IngredientsGender, IngredientsImageURL, IngredientsCreatedDate, IngredientsIsActive) 
+                (IngredientsName, IngredientsDescription, IngredientsPrice, IngredientsTags, IngredientsDiscount, IngredientsGender, IngredientsImageURL, IngredientsCreatedDate, IngredientsIsActive,ProductType) 
                 VALUES 
-                (@Name, @Description, @Price, @Tags, @Discount, @Gender, @ImageURL, @CreatedDate, @IsActive)
+                (@Name, @Description, @Price, @Tags, @Discount, @Gender, @ImageURL, @CreatedDate, @IsActive,@ProductType)
             ";
 
                 SqlCommand command = new SqlCommand(query, connection);
@@ -125,6 +125,7 @@ namespace PerfurmeCity.DATA
                 command.Parameters.AddWithValue("@ImageURL", ingredient.IngridientsImageURL ?? (object)DBNull.Value); // Handle null values
                 command.Parameters.AddWithValue("@CreatedDate", DateTime.Now); // Use the current date and time
                 command.Parameters.AddWithValue("@IsActive", ingredient.IngridientsIsActive);
+                command.Parameters.AddWithValue("@ProductType", ingredient.ProductType);
 
                 try
                 {
@@ -146,7 +147,7 @@ namespace PerfurmeCity.DATA
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "select * from Ingredients";
+                string query = "select * from Ingredients Where ProductType='Ingrident'";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
@@ -344,11 +345,177 @@ namespace PerfurmeCity.DATA
         }
 
 
+        public DataTable GetIngredientsByGender(string IngredientsGender)
+        {
+            DataTable dt = new DataTable();
 
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Ingredients WHERE ProductType='Products' and IngredientsGender = @IngredientsGender";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@IngredientsGender", IngredientsGender);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    dt.Load(reader); // Load data into DataTable
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            return dt;
+        }
+        public DataTable GetAddressDetails(int userID)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Address WHERE UserID = @UserID";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@UserID", userID);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        dt.Load(reader);
+                    }
+                    else
+                    {
+                        // If address not found, return a DataTable with empty fields
+                        dt.Columns.Add("AddressID", typeof(int));
+                        dt.Columns.Add("Address1", typeof(string));
+                        dt.Columns.Add("Address2", typeof(string));
+                        dt.Columns.Add("Email", typeof(string));
+                        dt.Columns.Add("Phone", typeof(string));
+                        dt.Columns.Add("City", typeof(string));
+                        dt.Columns.Add("ZipCode", typeof(string));
+                        dt.Columns.Add("State", typeof(string));
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            return dt;
+        }
+        public decimal GetTotalPriceInCart(int userId)
+        {
+            decimal totalPrice = 0;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = @"
+                    SELECT SUM(Ingredients.IngredientsPrice * CartDetails.Quantity) AS TotalPrice
+                    FROM CartDetails
+                    INNER JOIN Ingredients ON CartDetails.IngredientID = Ingredients.IngredientsID
+                    WHERE CartDetails.UserID = @UserID
+                ";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@UserID", userId); // Add parameter to the query
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+                if (result != DBNull.Value && result != null)
+                {
+                    totalPrice = Convert.ToDecimal(result);
+                }
+            }
+
+            return totalPrice;
+        }
+        public string GenerateOrderID()
+        {
+            string orderID = "";
+
+            // Generate a unique Order ID
+            orderID = Guid.NewGuid().ToString("N").Substring(0, 8); // You can adjust the length of the Order ID as needed
+
+            return orderID;
+        }
+
+        public void UpdateOrCreateAddress(int userID, string address1, string address2, string email, string phone, string city, string stringShippingMethod, string zipCode, string state)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = @"IF EXISTS (SELECT * FROM Address WHERE UserID = @UserID)
+                                    UPDATE Address SET Address1 = @Address1, Address2 = @Address2, Email = @Email, Phone = @Phone, City = @City, ZipCode = @ZipCode, State = @State
+                                    WHERE UserID = @UserID
+                                ELSE
+                                    INSERT INTO Address (UserID, Address1, Address2, Email, Phone, City,ShippingMethod, ZipCode, State)
+                                    VALUES (@UserID, @Address1, @Address2, @Email, @Phone, @City,@ShippingMethod, @ZipCode, @State)";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@UserID", userID);
+                command.Parameters.AddWithValue("@Address1", address1 ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@Address2", address2 ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@Email", email ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@Phone", phone ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@City", city ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@ShippingMethod", stringShippingMethod);
+                command.Parameters.AddWithValue("@ZipCode", zipCode ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@State", state ?? (object)DBNull.Value);
+
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        public void CreateOrderDetails(int userID, DataTable orderDetails)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "INSERT INTO OrderDetails (UserID, ProductID, Quantity, TotalPrice) VALUES (@UserID, @ProductID, @Quantity, @TotalPrice)";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@UserID", userID);
+
+                try
+                {
+                    connection.Open();
+                    foreach (DataRow row in orderDetails.Rows)
+                    {
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("@UserID", userID);
+                        command.Parameters.AddWithValue("@ProductID", row["ProductID"]);
+                        command.Parameters.AddWithValue("@Quantity", row["Quantity"]);
+                        command.Parameters.AddWithValue("@TotalPrice", row["TotalPrice"]);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
 
 
 
     }
+
+
 }
 public class CartDetail
 {

@@ -35,6 +35,7 @@ namespace PerfurmeCity.UI
             newproduct.IngridientsPrice = Convert.ToInt32(txtPrice.Text);
             newproduct.IngridientsDiscount = Convert.ToDecimal(txtOffer.Text);
             newproduct.Ingridientstags = txttags.Text;
+            newproduct.ProductType = ddlproductFilter.SelectedItem.Value;
             SaveProductInformation(newproduct);
 
 
@@ -67,10 +68,13 @@ namespace PerfurmeCity.UI
                         IngridientsImageURL = "~/IMAGES/ServerImage/" + filename,
                         Ingridientstags = ingridients.Ingridientstags,
                         IngridientsDiscount = Convert.ToDecimal(ingridients.IngridientsDiscount),
-                        IngridientsPrice = Convert.ToDecimal(ingridients.IngridientsPrice)
+                        IngridientsPrice = Convert.ToDecimal(ingridients.IngridientsPrice),
+                        IngridientsGender= ingridients.IngridientsGender,
+                        ProductType=ingridients.ProductType,
                     };
                     DataAccess dao = new DataAccess();
-                    // Save product information in the database
+                    // Save product information in the da
+                    // tabase
                     dao.SaveIngredient(ingridient);
                     btnSaveProduct.Text = "Save";
                 }
