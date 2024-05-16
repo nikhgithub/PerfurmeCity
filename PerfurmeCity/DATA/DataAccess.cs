@@ -351,7 +351,17 @@ namespace PerfurmeCity.DATA
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM Ingredients WHERE ProductType='Products' and IngredientsGender = @IngredientsGender";
+                string query = "";
+                if (IngredientsGender== "unisex")
+                {
+                     query = "SELECT * FROM Ingredients WHERE ProductType='Products'";
+                }
+                else
+                {
+                     query = "SELECT * FROM Ingredients WHERE ProductType='Products' and IngredientsGender = @IngredientsGender";
+                }
+              
+                
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@IngredientsGender", IngredientsGender);
 

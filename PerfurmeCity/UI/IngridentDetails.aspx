@@ -231,7 +231,7 @@
         <!-- Dummy Address -->
         <div class="address">
             <h3>Our Location</h3>
-            <p>123 Main Street, City, Country</p>
+            <p>2002 Westfield,Annapolis Mall, MD 21401, United States</p>
         </div>
 
         <!-- Contact Form (You can replace it with your actual contact form) -->
